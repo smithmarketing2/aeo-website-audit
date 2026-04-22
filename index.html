@@ -189,11 +189,6 @@
     </div>
 
     <script>
-        // Global Control API Configuration
-        const GC_API_KEY = '547b49b19c1bf6abb8abec2328d487221f4bc13c6b5359199001bf46d0e58ebe';
-        const GC_BASE_URL = 'https://api.globalcontrol.io/api/ai';
-        const GC_TAG_ID = '69e91ff580a5749c2a6e58a2'; // AEO Website Audit Lead tag
-
         document.getElementById('leadForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             var btn = document.getElementById('submitBtn');
@@ -202,52 +197,29 @@
             btn.textContent = 'Submitting...';
             
             const formData = new FormData(this);
-            const name = formData.get('name');
-            const email = formData.get('email');
-            const website = formData.get('website');
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                website: formData.get('website')
+            };
             
             try {
-                // Step 1: Create or update contact in Global Control
-                const contactResponse = await fetch(`${GC_BASE_URL}/contacts`, {
+                const response = await fetch('/api/submit', {
                     method: 'POST',
                     headers: {
-                        'X-API-KEY': GC_API_KEY,
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({
-                        email: email,
-                        firstName: name.split(' ')[0] || name,
-                        lastName: name.split(' ').slice(1).join(' ') || '',
-                        customFields: [
-                            { key: 'website_url', value: website },
-                            { key: 'lead_source', value: 'AEO Website Audit Lead Page' }
-                        ]
-                    })
+                    body: JSON.stringify(data)
                 });
                 
-                const contactData = await contactResponse.json();
+                const result = await response.json();
                 
-                if (contactData.type === 'response' && contactData.data) {
-                    const contactId = contactData.data._id || contactData.data.id;
-                    
-                    // Step 2: Apply the tag
-                    await fetch(`${GC_BASE_URL}/tags/fire-tag/${GC_TAG_ID}`, {
-                        method: 'POST',
-                        headers: {
-                            'X-API-KEY': GC_API_KEY,
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            email: email
-                        })
-                    });
-                    
-                    msg.style.display = 'block';
-                    msg.className = 'success';
-                    msg.textContent = 'Thanks! We\'ll send your audit within 24 hours.';
+                msg.style.display = 'block';
+                msg.className = result.status === 'success' ? 'success' : 'error';
+                msg.textContent = result.message;
+                
+                if (result.status === 'success') {
                     this.reset();
-                } else {
-                    throw new Error('Failed to create contact');
                 }
                 
             } catch (error) {
