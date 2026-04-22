@@ -213,11 +213,17 @@
                 body: JSON.stringify(data),
                 headers: { 'Content-Type': 'application/json' }
             })
-            .then(() => {
+            .then(r => r.json())
+            .then(data => {
                 msg.style.display = 'block';
                 msg.className = 'success';
-                msg.textContent = '✓ Success! Check your email for your audit.';
+                msg.textContent = '✓ Success! Redirecting...';
                 document.getElementById('leadForm').reset();
+                
+                // Redirect after 1.5 seconds
+                setTimeout(() => {
+                    window.location.href = data.redirectUrl || 'https://digitalmarketingproreviews.com';
+                }, 1500);
             })
             .catch(() => {
                 msg.style.display = 'block';

@@ -61,7 +61,8 @@ export default async function handler(req, res) {
     return res.status(200).json({
       status: 'success',
       message: "Thanks! We'll send your audit within 24 hours.",
-      contactId: contactData.data._id
+      contactId: contactData.data._id,
+      redirectUrl: 'https://digitalmarketingproreviews.com'
     });
 
   } catch (error) {
