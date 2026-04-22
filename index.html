@@ -13,18 +13,19 @@
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             color: #ffffff;
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             padding: 40px 20px;
         }
         .container {
-            max-width: 700px;
-            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .headline-section {
             text-align: center;
+            max-width: 800px;
+            margin: 0 auto 50px;
         }
         .headline {
-            font-size: clamp(1.75rem, 5vw, 2.5rem);
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
             font-weight: 800;
             line-height: 1.2;
             margin-bottom: 15px;
@@ -32,35 +33,69 @@
         .subheadline {
             font-size: 1.1rem;
             color: #a0aec0;
-            margin-bottom: 30px;
         }
-        .benefits {
-            text-align: left;
-            max-width: 500px;
-            margin: 0 auto 40px;
+        .split-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 50px;
+            align-items: start;
         }
-        .benefit-item {
+        .video-side {
+            position: sticky;
+            top: 20px;
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: none;
+        }
+        .video-placeholder {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             display: flex;
-            align-items: flex-start;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+            color: #a0aec0;
+            font-size: 1.1rem;
+            text-align: center;
+            padding: 20px;
+        }
+        .video-placeholder svg {
+            width: 64px;
+            height: 64px;
             margin-bottom: 15px;
-            font-size: 1rem;
+            opacity: 0.5;
         }
-        .checkmark {
-            color: #10b981;
-            font-weight: bold;
-            margin-right: 12px;
-            font-size: 1.2rem;
-            flex-shrink: 0;
-        }
-        .form-container {
+        .form-side {
             background: rgba(255, 255, 255, 0.05);
             padding: 40px;
             border-radius: 16px;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
+        .form-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .form-subtitle {
+            color: #a0aec0;
+            font-size: 0.95rem;
+            margin-bottom: 30px;
+        }
         .form-group {
             margin-bottom: 20px;
-            text-align: left;
         }
         .form-group label {
             display: block;
@@ -105,64 +140,75 @@
             margin-top: 20px;
             font-size: 0.8rem;
             color: #6b7280;
+            text-align: center;
         }
         #formMessage {
             display: none;
             margin-top: 15px;
             padding: 12px;
             border-radius: 8px;
+            text-align: center;
         }
         .success { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
         .error { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+
+        /* Mobile: Stack vertically */
+        @media (max-width: 900px) {
+            .split-layout {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .video-side {
+                position: relative;
+                top: 0;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 class="headline">Is Your Website Costing You Customers? Get Your Free Audit</h1>
-        <p class="subheadline">Discover hidden issues hurting your rankings and conversions in 60 seconds</p>
-        
-        <div class="benefits">
-            <div class="benefit-item">
-                <span class="checkmark">✓</span>
-                <span>SEO issues that are pushing you down in Google rankings</span>
-            </div>
-            <div class="benefit-item">
-                <span class="checkmark">✓</span>
-                <span>Speed problems that make visitors leave before they see your offer</span>
-            </div>
-            <div class="benefit-item">
-                <span class="checkmark">✓</span>
-                <span>Mobile issues costing you customers on phones and tablets</span>
-            </div>
-            <div class="benefit-item">
-                <span class="checkmark">✓</span>
-                <span>Missing elements that kill conversions and sales</span>
-            </div>
-            <div class="benefit-item">
-                <span class="checkmark">✓</span>
-                <span>Broken links and errors damaging your credibility</span>
-            </div>
+        <div class="headline-section">
+            <h1 class="headline">Is Your Website Costing You Customers? Get Your Free Audit</h1>
+            <p class="subheadline">Discover hidden issues hurting your rankings and conversions in 60 seconds</p>
         </div>
         
-        <div class="form-container">
-            <form id="leadForm" action="https://script.google.com/macros/s/AKfycbzNysYTrBXhYoqxlSgNDsamNCidm3AX8agj2LK7czOugrJ3lT_w6lnblrXQP2SY-PA/exec" method="POST">
-                <div class="form-group">
-                    <label for="name">Full Name</label>
-                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
+        <div class="split-layout">
+            <div class="video-side">
+                <div class="video-container">
+                    <div class="video-placeholder">
+                        <div>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polygon points="10 8 16 12 10 16 10 8" fill="currentColor"/>
+                            </svg>
+                            <p>Video Placeholder<br><small>Add your YouTube/Vimeo embed URL</small></p>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
-                </div>
-                <div class="form-group">
-                    <label for="website">Website URL</label>
-                    <input type="url" id="website" name="website" placeholder="https://yourwebsite.com" required>
-                </div>
-                <input type="hidden" name="source" value="AEO Website Audit Lead Page">
-                <button type="submit" class="submit-btn" id="submitBtn">Get My Free Audit</button>
-                <div id="formMessage"></div>
-            </form>
-            <p class="privacy-text">We respect your privacy. Unsubscribe anytime.</p>
+            </div>
+            
+            <div class="form-side">
+                <h2 class="form-title">Get Your Free Website Audit</h2>
+                <p class="form-subtitle">Enter your details below and we'll analyze your site</p>
+                <form id="leadForm" action="https://script.google.com/macros/s/AKfycbzNysYTrBXhYoqxlSgNDsamNCidm3AX8agj2LK7czOugrJ3lT_w6lnblrXQP2SY-PA/exec" method="POST">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="website">Website URL</label>
+                        <input type="url" id="website" name="website" placeholder="https://yourwebsite.com" required>
+                    </div>
+                    <input type="hidden" name="source" value="AEO Website Audit Lead Page">
+                    <button type="submit" class="submit-btn" id="submitBtn">Get My Free Audit</button>
+                    <div id="formMessage"></div>
+                </form>
+                <p class="privacy-text">We respect your privacy. Unsubscribe anytime.</p>
+            </div>
         </div>
     </div>
 
