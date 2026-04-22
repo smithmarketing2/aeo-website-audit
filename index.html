@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Is Your Website Costing You Customers? Get Your Free Audit | AEO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 700px;
+            width: 100%;
+            text-align: center;
+        }
+        .headline {
+            font-size: clamp(1.75rem, 5vw, 2.5rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 15px;
+        }
+        .subheadline {
+            font-size: 1.1rem;
+            color: #a0aec0;
+            margin-bottom: 30px;
+        }
+        .benefits {
+            text-align: left;
+            max-width: 500px;
+            margin: 0 auto 40px;
+        }
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+        .checkmark {
+            color: #10b981;
+            font-weight: bold;
+            margin-right: 12px;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .form-container {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #10b981;
+        }
+        .form-group input::placeholder {
+            color: #6b7280;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+        }
+        .privacy-text {
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+        #formMessage {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
+        }
+        .success { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+        .error { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="headline">Is Your Website Costing You Customers? Get Your Free Audit</h1>
+        <p class="subheadline">Discover hidden issues hurting your rankings and conversions in 60 seconds</p>
+        
+        <div class="benefits">
+            <div class="benefit-item">
+                <span class="checkmark">✓</span>
+                <span>SEO issues that are pushing you down in Google rankings</span>
+            </div>
+            <div class="benefit-item">
+                <span class="checkmark">✓</span>
+                <span>Speed problems that make visitors leave before they see your offer</span>
+            </div>
+            <div class="benefit-item">
+                <span class="checkmark">✓</span>
+                <span>Mobile issues costing you customers on phones and tablets</span>
+            </div>
+            <div class="benefit-item">
+                <span class="checkmark">✓</span>
+                <span>Missing elements that kill conversions and sales</span>
+            </div>
+            <div class="benefit-item">
+                <span class="checkmark">✓</span>
+                <span>Broken links and errors damaging your credibility</span>
+            </div>
+        </div>
+        
+        <div class="form-container">
+            <form id="leadForm" action="YOUR_GOOGLE_SCRIPT_URL_HERE" method="POST">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="website">Website URL</label>
+                    <input type="url" id="website" name="website" placeholder="https://yourwebsite.com" required>
+                </div>
+                <input type="hidden" name="source" value="AEO Website Audit Lead Page">
+                <button type="submit" class="submit-btn" id="submitBtn">Get My Free Audit</button>
+                <div id="formMessage"></div>
+            </form>
+            <p class="privacy-text">We respect your privacy. Unsubscribe anytime.</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('leadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var btn = document.getElementById('submitBtn');
+            var msg = document.getElementById('formMessage');
+            btn.disabled = true;
+            btn.textContent = 'Submitting...';
+            
+            var params = new URLSearchParams(new FormData(this));
+            fetch(this.action, { method: 'POST', body: params })
+            .then(r => r.json())
+            .then(data => {
+                msg.style.display = 'block';
+                msg.className = data.status === 'success' ? 'success' : 'error';
+                msg.textContent = data.message;
+                if (data.status === 'success') this.reset();
+            })
+            .catch(() => {
+                msg.style.display = 'block';
+                msg.className = 'error';
+                msg.textContent = 'Error submitting. Please try again.';
+            })
+            .finally(() => {
+                btn.disabled = false;
+                btn.textContent = 'Get My Free Audit';
+            });
+        });
+    </script>
+</body>
+</html>
