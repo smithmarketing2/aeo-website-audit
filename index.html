@@ -60,25 +60,6 @@
             border: none;
             object-fit: cover;
         }
-        .video-placeholder {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
-            color: #a0aec0;
-            font-size: 1.1rem;
-            text-align: center;
-            padding: 20px;
-        }
-        .video-placeholder svg {
-            width: 64px;
-            height: 64px;
-            margin-bottom: 15px;
-            opacity: 0.5;
-        }
         .form-side {
             background: rgba(255, 255, 255, 0.05);
             padding: 40px;
@@ -186,7 +167,7 @@
             <div class="form-side">
                 <h2 class="form-title">Get Your Free Website Audit</h2>
                 <p class="form-subtitle">Enter your details below and we'll analyze your site</p>
-                <form id="leadForm" action="https://script.google.com/macros/s/AKfycbzNysYTrBXhYoqxlSgNDsamNCidm3AX8agj2LK7czOugrJ3lT_w6lnblrXQP2SY-PA/exec" method="POST">
+                <form id="leadForm">
                     <div class="form-group">
                         <label for="name">Full Name</label>
                         <input type="text" id="name" name="name" placeholder="Enter your name" required>
@@ -199,7 +180,6 @@
                         <label for="website">Website URL</label>
                         <input type="url" id="website" name="website" placeholder="https://yourwebsite.com" required>
                     </div>
-                    <input type="hidden" name="source" value="AEO Website Audit Lead Page">
                     <button type="submit" class="submit-btn" id="submitBtn">Get My Free Audit</button>
                     <div id="formMessage"></div>
                 </form>
@@ -209,31 +189,76 @@
     </div>
 
     <script>
-        document.getElementById('leadForm').addEventListener('submit', function(e) {
+        // Global Control API Configuration
+        const GC_API_KEY = '547b49b19c1bf6abb8abec2328d487221f4bc13c6b5359199001bf46d0e58ebe';
+        const GC_BASE_URL = 'https://api.globalcontrol.io/api/ai';
+        const GC_TAG_ID = '69e91ff580a5749c2a6e58a2'; // AEO Website Audit Lead tag
+
+        document.getElementById('leadForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             var btn = document.getElementById('submitBtn');
             var msg = document.getElementById('formMessage');
             btn.disabled = true;
             btn.textContent = 'Submitting...';
             
-            var params = new URLSearchParams(new FormData(this));
-            fetch(this.action, { method: 'POST', body: params })
-            .then(r => r.json())
-            .then(data => {
-                msg.style.display = 'block';
-                msg.className = data.status === 'success' ? 'success' : 'error';
-                msg.textContent = data.message;
-                if (data.status === 'success') this.reset();
-            })
-            .catch(() => {
+            const formData = new FormData(this);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const website = formData.get('website');
+            
+            try {
+                // Step 1: Create or update contact in Global Control
+                const contactResponse = await fetch(`${GC_BASE_URL}/contacts`, {
+                    method: 'POST',
+                    headers: {
+                        'X-API-KEY': GC_API_KEY,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        firstName: name.split(' ')[0] || name,
+                        lastName: name.split(' ').slice(1).join(' ') || '',
+                        customFields: [
+                            { key: 'website_url', value: website },
+                            { key: 'lead_source', value: 'AEO Website Audit Lead Page' }
+                        ]
+                    })
+                });
+                
+                const contactData = await contactResponse.json();
+                
+                if (contactData.type === 'response' && contactData.data) {
+                    const contactId = contactData.data._id || contactData.data.id;
+                    
+                    // Step 2: Apply the tag
+                    await fetch(`${GC_BASE_URL}/tags/fire-tag/${GC_TAG_ID}`, {
+                        method: 'POST',
+                        headers: {
+                            'X-API-KEY': GC_API_KEY,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            email: email
+                        })
+                    });
+                    
+                    msg.style.display = 'block';
+                    msg.className = 'success';
+                    msg.textContent = 'Thanks! We\'ll send your audit within 24 hours.';
+                    this.reset();
+                } else {
+                    throw new Error('Failed to create contact');
+                }
+                
+            } catch (error) {
+                console.error('Error:', error);
                 msg.style.display = 'block';
                 msg.className = 'error';
-                msg.textContent = 'Error submitting. Please try again.';
-            })
-            .finally(() => {
+                msg.textContent = 'Something went wrong. Please try again.';
+            } finally {
                 btn.disabled = false;
                 btn.textContent = 'Get My Free Audit';
-            });
+            }
         });
     </script>
 </body>
