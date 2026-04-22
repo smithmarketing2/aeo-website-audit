@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Is Your Website Costing You Customers? Get Your Free Audit | AEO</title>
+    <title>Free AEO Website Audit | Smith Media Marketing</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -16,42 +16,36 @@
             padding: 40px 20px;
         }
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .headline-section {
-            text-align: center;
             max-width: 800px;
-            margin: 0 auto 50px;
+            margin: 0 auto;
+            text-align: center;
         }
         .headline {
-            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-size: clamp(1.75rem, 5vw, 2.5rem);
             font-weight: 800;
             line-height: 1.2;
             margin-bottom: 15px;
+            background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         .subheadline {
             font-size: 1.1rem;
-            color: #a0aec0;
-        }
-        .split-layout {
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 50px;
-            align-items: start;
-        }
-        .video-side {
-            position: sticky;
-            top: 20px;
+            color: #94a3b8;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
         .video-container {
             position: relative;
             padding-bottom: 56.25%;
             height: 0;
+            margin-bottom: 40px;
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            background: rgba(255, 255, 255, 0.05);
         }
         .video-container video {
             position: absolute;
@@ -60,30 +54,25 @@
             border: none;
             object-fit: cover;
         }
-        .form-side {
+        .form-container {
+            max-width: 500px;
+            margin: 0 auto;
             background: rgba(255, 255, 255, 0.05);
             padding: 40px;
             border-radius: 16px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .form-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        .form-subtitle {
-            color: #a0aec0;
-            font-size: 0.95rem;
-            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
         }
         .form-group {
             margin-bottom: 20px;
+            text-align: left;
         }
         .form-group label {
             display: block;
             margin-bottom: 8px;
             font-weight: 500;
             font-size: 0.9rem;
+            color: #e2e8f0;
         }
         .form-group input {
             width: 100%;
@@ -97,15 +86,15 @@
         }
         .form-group input:focus {
             outline: none;
-            border-color: #10b981;
+            border-color: #6366f1;
         }
         .form-group input::placeholder {
-            color: #6b7280;
+            color: #64748b;
         }
         .submit-btn {
             width: 100%;
             padding: 18px;
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
             color: white;
             border: none;
             border-radius: 10px;
@@ -116,13 +105,17 @@
         }
         .submit-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+        }
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
         }
         .privacy-text {
             margin-top: 20px;
             font-size: 0.8rem;
-            color: #6b7280;
-            text-align: center;
+            color: #64748b;
         }
         #formMessage {
             display: none;
@@ -133,104 +126,108 @@
         }
         .success { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
         .error { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
-
-        /* Mobile: Stack vertically */
-        @media (max-width: 900px) {
-            .split-layout {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            .video-side {
-                position: relative;
-                top: 0;
-            }
+        .benefits {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .benefit {
+            background: rgba(99, 102, 241, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: #a5b4fc;
+            border: 1px solid rgba(99, 102, 241, 0.3);
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="headline-section">
-            <h1 class="headline">Is Your Website Costing You Customers? Get Your Free Audit</h1>
-            <p class="subheadline">Discover hidden issues hurting your rankings and conversions in 60 seconds</p>
+        <h1 class="headline">Get Your Free AEO Website Audit</h1>
+        <p class="subheadline">Discover how to rank higher in AI search engines and get found by more local customers</p>
+        
+        <div class="benefits">
+            <span class="benefit">✓ AI Search Optimization</span>
+            <span class="benefit">✓ Local SEO Analysis</span>
+            <span class="benefit">✓ Actionable Recommendations</span>
         </div>
         
-        <div class="split-layout">
-            <div class="video-side">
-                <div class="video-container">
-                    <video controls playsinline>
-                        <source src="https://media.publit.io/file/h_480/2f34e77c-bf64-4daa-959a-7737d11076c1-1.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
+        <div class="video-container">
+            <video controls poster="">
+                <source src="https://media.publit.io/file/h_720/2f34e77c-bf64-4daa-959a-7737d11076c1-1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        
+        <div class="form-container">
+            <form id="leadForm" action="{{FORM_ACTION}}" method="POST">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
                 </div>
-            </div>
-            
-            <div class="form-side">
-                <h2 class="form-title">Get Your Free Website Audit</h2>
-                <p class="form-subtitle">Enter your details below and we'll analyze your site</p>
-                <form id="leadForm">
-                    <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" name="name" placeholder="Enter your name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="website">Website URL</label>
-                        <input type="url" id="website" name="website" placeholder="https://yourwebsite.com" required>
-                    </div>
-                    <button type="submit" class="submit-btn" id="submitBtn">Get My Free Audit</button>
-                    <div id="formMessage"></div>
-                </form>
-                <p class="privacy-text">We respect your privacy. Unsubscribe anytime.</p>
-            </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="business">Business Name</label>
+                    <input type="text" id="business" name="business" placeholder="Your business name" required>
+                </div>
+                <div class="form-group">
+                    <label for="website">Website URL</label>
+                    <input type="url" id="website" name="website" placeholder="https://yourwebsite.com" required>
+                </div>
+                <input type="hidden" name="source" value="aeo-website-audit">
+                <button type="submit" class="submit-btn" id="submitBtn">Get Instant Access</button>
+                <div id="formMessage"></div>
+            </form>
+            <p class="privacy-text">🔒 Your information is secure. We never share your data.</p>
         </div>
     </div>
 
     <script>
-        document.getElementById('leadForm').addEventListener('submit', async function(e) {
+        // API endpoint for form submission
+        const FORM_ACTION = '/api/submit';
+        
+        document.getElementById('leadForm').addEventListener('submit', function(e) {
             e.preventDefault();
             var btn = document.getElementById('submitBtn');
             var msg = document.getElementById('formMessage');
             btn.disabled = true;
             btn.textContent = 'Submitting...';
             
-            const formData = new FormData(this);
-            const data = {
+            var formData = new FormData(this);
+            var data = {
                 name: formData.get('name'),
                 email: formData.get('email'),
-                website: formData.get('website')
+                business: formData.get('business'),
+                website: formData.get('website'),
+                source: formData.get('source'),
+                timestamp: new Date().toISOString()
             };
             
-            try {
-                const response = await fetch('/api/submit', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                });
-                
-                const result = await response.json();
-                
+            fetch('/api/submit', {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: { 'Content-Type': 'application/json' }
+            })
+            .then(() => {
                 msg.style.display = 'block';
-                msg.className = result.status === 'success' ? 'success' : 'error';
-                msg.textContent = result.message;
-                
-                if (result.status === 'success') {
-                    this.reset();
-                }
-                
-            } catch (error) {
-                console.error('Error:', error);
+                msg.className = 'success';
+                msg.textContent = '✓ Success! Check your email for your audit.';
+                document.getElementById('leadForm').reset();
+            })
+            .catch(() => {
                 msg.style.display = 'block';
                 msg.className = 'error';
-                msg.textContent = 'Something went wrong. Please try again.';
-            } finally {
+                msg.textContent = 'Error submitting. Please try again.';
+            })
+            .finally(() => {
                 btn.disabled = false;
-                btn.textContent = 'Get My Free Audit';
-            }
+                btn.textContent = 'Get Instant Access';
+            });
         });
     </script>
 </body>

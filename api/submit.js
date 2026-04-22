@@ -12,7 +12,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ status: 'error', message: 'Method not allowed' });
   }
 
-  const { name, email, website } = req.body;
+  const { name, email, website, business } = req.body;
   
   if (!email || !name) {
     return res.status(400).json({ status: 'error', message: 'Name and email are required' });
@@ -36,6 +36,7 @@ export default async function handler(req, res) {
         lastName: name.split(' ').slice(1).join(' ') || '',
         customFields: [
           { key: 'website_url', value: website || '' },
+          { key: 'business_name', value: business || '' },
           { key: 'lead_source', value: 'AEO Website Audit Lead Page' }
         ]
       })
